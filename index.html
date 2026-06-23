@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um convite especial... ❤️</title>
+    <!-- Tailwind CSS para um design moderno e responsivo -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 to-red-50 min-h-screen font-sans flex flex-col items-center justify-center p-4 relative overflow-x-hidden">
+
+    <!-- Botão Secreto "Não clique aqui" -->
+    <div class="absolute top-4 right-4" id="secret-btn-container">
+        <button id="btn-secret" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transform hover:scale-105 transition text-sm animate-bounce">
+            ⚠️ Não clique aqui
+        </button>
+    </div>
+
+    <!-- Container Principal do Quiz -->
+    <main class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center border border-pink-100 relative">
+        
+        <!-- Passo 1: Rebelde + Mensagem para 2045 -->
+        <div id="step-1" class="hidden animate-fade-in text-left">
+            <button onclick="navigate('step-1', 'step-2')" class="text-gray-400 hover:text-pink-500 transition text-xs inline-flex items-center gap-1 mb-4 font-medium">
+                <i class="fa-solid fa-chevron-left text-[10px]"></i> Voltar
+            </button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Você é muito rebelde! 😜</h2>
+            <p class="text-gray-600 mb-6 text-sm leading-relaxed text-center">
+                Falei para não clicar, mas já que clicou... sabia que vou guardar esse site com muito carinho? Por favor, entre na brincadeira e mande uma mensagem para os nossos filhos. Essa mensagem só será vista em 2045 (o cronômetro já está programado!).
+            </p>
+            <textarea id="msg-2045" rows="4" class="w-full p-3 border border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 text-gray-700 placeholder-gray-400 mb-4 text-sm" placeholder="Escreva aqui a mensagem para o futuro..."></textarea>
+            <button onclick="navigate('step-1', 'step-2')" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-lg shadow-md transition text-center">
+                Enviar para o Futuro 🚀
+            </button>
+        </div>
+
+        <!-- Passo 2: Gostaria de sair cmg? -->
+        <div id="step-2" class="animate-fade-in">
+            <div class="text-pink-500 text-5xl mb-4 mt-4"><i class="fa-solid fa-heart-pulse animate-pulse"></i></div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Gostaria de sair comigo Emily? 😊</h2>
+            <div class="space-y-3">
+                <button onclick="navigate('step-2', 'step-3')" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 rounded-lg shadow transition transform hover:scale-102">Sim!</button>
+                <button onclick="navigate('step-2', 'step-3')" class="w-full bg-red-400 hover:bg-red-500 text-white font-semibold py-3 rounded-lg shadow transition transform hover:scale-102">Com certeza!</button>
+            </div>
+        </div>
+
+        <!-- Passo 3: Tem certeza? -->
+        <div id="step-3" class="hidden animate-fade-in text-left">
+            <button onclick="navigate('step-3', 'step-2')" class="text-gray-400 hover:text-pink-500 transition text-xs inline-flex items-center gap-1 mb-4 font-medium">
+                <i class="fa-solid fa-chevron-left text-[10px]"></i> Voltar
+            </button>
+            <div class="text-center">
+                <div class="text-yellow-500 text-5xl mb-4"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h2 class="text-xl font-bold text-gray-800 mb-2">Tem certeza? 🤔</h2>
+                <p class="text-red-500 font-medium mb-6 text-sm">É um caminho sem volta, com alto risco de se apaixonar!</p>
+            </div>
+            <div class="space-y-3">
+                <button onclick="navigate('step-3', 'step-4')" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 rounded-lg shadow transition text-center">Sim</button>
+                <button onclick="navigate('step-3', 'step-4')" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 rounded-lg shadow transition text-center">Sim (por sua conta e risco)</button>
+            </div>
+        </div>
+
+        <!-- Passo 4: Logística (Almoço e Cinema) -->
+        <div id="step-4" class="hidden animate-fade-in text-left">
+            <button onclick="navigate('step-4', 'step-3')" class="text-gray-400 hover:text-pink-500 transition text-xs inline-flex items-center gap-1 mb-4 font-medium">
+                <i class="fa-solid fa-chevron-left text-[10px]"></i> Voltar
+            </button>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">Que bom, fico feliz! 😍</h2>
+            <p class="text-gray-600 text-sm text-center mb-6">Agora, vamos alinhar as preferências do nosso encontro:</p>
+            
+            <!-- Opção de Almoço -->
+            <div class="mb-5">
+                <label class="block text-gray-700 font-bold mb-2 text-sm"><i class="fa-solid fa-utensils text-pink-500 mr-1"></i> O que prefere?</label>
+                <div class="space-y-2">
+                    <label class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:bg-pink-50 transition text-sm">
+                        <input type="radio" name="lunch" value="13h" checked class="form-radio text-pink-500 h-4 w-4 mr-2" onchange="checkSessionLogic()">
+                        <span>Comer antes: Almoçar às 13h</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:bg-pink-50 transition text-sm">
+                        <input type="radio" name="lunch" value="15h" class="form-radio text-pink-500 h-4 w-4 mr-2" onchange="checkSessionLogic()">
+                        <span>Comer depois: Almoçar às 15h</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Opção de Sessão -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2 text-sm"><i class="fa-solid fa-film text-pink-500 mr-1"></i> Qual sessão do cinema?</label>
+                <div class="space-y-2" id="session-container">
+                    <label id="lbl-sessao-12" class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:bg-pink-50 transition text-sm">
+                        <input type="radio" name="session" value="12h (3D)" id="sessao-12" class="form-radio text-pink-500 h-4 w-4 mr-2">
+                        <span>12h (3D)</span>
+                    </label>
+                    <label id="lbl-sessao-13" class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:bg-pink-50 transition text-sm">
+                        <input type="radio" name="session" value="13h" id="sessao-13" class="form-radio text-pink-500 h-4 w-4 mr-2">
+                        <span>13h</span>
+                    </label>
+                    <label id="lbl-sessao-1345" class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:bg-pink-50 transition text-sm">
+                        <input type="radio" name="session" value="13h45" id="sessao-1345" checked class="form-radio text-pink-500 h-4 w-4 mr-2">
+                        <span>13h45</span>
+                    </label>
+                </div>
+            </div>
+
+            <button onclick="generateConfirmation()" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 rounded-lg shadow-md transition text-center block">
+                Confirmar Escolhas ➔
+            </button>
+        </div>
+
+        <!-- Passo 5: Tela Final de Confirmação -->
+        <div id="step-5" class="hidden animate-fade-in text-left">
+            <button onclick="navigate('step-5', 'step-4')" class="text-gray-400 hover:text-pink-500 transition text-xs inline-flex items-center gap-1 mb-4 font-medium">
+                <i class="fa-solid fa-chevron-left text-[10px]"></i> Voltar e Alterar
+            </button>
+            <div class="text-center mb-4 text-emerald-500 text-5xl"><i class="fa-solid fa-circle-check"></i></div>
+            <h2 class="text-xl font-bold text-gray-800 text-center mb-2">Combinado! 📝</h2>
+            <p class="text-gray-600 text-sm text-center mb-6">Você está no caminho certo para se tornar o amor da minha vida. Veja as informações do nosso encontro abaixo:</p>
+            
+            <div class="bg-pink-50 p-4 rounded-xl border border-pink-100 space-y-4 text-sm text-gray-700 mb-6">
+                <p><strong><i class="fa-solid fa-calendar-days text-pink-500 mr-1"></i> Data:</strong> 28/06/2026 (Domingo)</p>
+                <p><strong><i class="fa-solid fa-train text-pink-500 mr-1"></i> 12:00h:</strong> Nos encontraremos na estação de trem Santo Amaro, estarei te esperando na plataforma.</p>
+                
+                <!-- Bloco Dinâmico de Cronograma -->
+                <div id="dynamic-itinerary" class="border-t border-pink-200 pt-3 space-y-3">
+                    <!-- Preenchido via JS -->
+                </div>
+
+                <p class="border-t border-pink-200 pt-3"><strong><i class="fa-solid fa-clock text-pink-500 mr-1"></i> Previsão de Retorno:</strong> 16:00h</p>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="space-y-3">
+                <a id="btn-calendar" target="_blank" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg shadow text-center block text-sm transition">
+                    <i class="fa-solid fa-calendar-plus mr-2"></i>Marcar na minha Agenda Google
+                </a>
+                <a id="btn-whatsapp" target="_blank" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-lg shadow text-center block text-sm transition">
+                    <i class="fa-brands fa-whatsapp mr-2"></i>Enviar Respostas 
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const SEU_TELEFONE = "5511993998332"; 
+
+        let message2045 = "Nenhuma mensagem enviada.";
+
+        // Função Genérica de Navegação
+        function navigate(fromStep, toStep) {
+            document.getElementById(fromStep).classList.add('hidden');
+            document.getElementById(toStep).classList.remove('hidden');
+            
+            if (fromStep === 'step-1' && toStep === 'step-2') {
+                document.getElementById('secret-btn-container').classList.remove('hidden');
+            }
+
+            if (toStep === 'step-4') {
+                checkSessionLogic();
+            }
+        }
+
+        // Controle do botão secreto rebelde
+        document.getElementById('btn-secret').addEventListener('click', function() {
+            document.getElementById('secret-btn-container').classList.add('hidden');
+            navigate('step-2', 'step-1');
+        });
+
+        // Lógica de bloqueio mútuo dos horários do cinema baseado no almoço
+        function checkSessionLogic() {
+            const lunchChoice = document.querySelector('input[name="lunch"]:checked').value;
+            const sessao12 = document.getElementById('sessao-12');
+            const sessao13 = document.getElementById('sessao-13');
+            const sessao1345 = document.getElementById('sessao-1345');
+            
+            const lbl12 = document.getElementById('lbl-sessao-12');
+            const lbl13 = document.getElementById('lbl-sessao-13');
+            const lbl1345 = document.getElementById('lbl-sessao-1345');
+
+            // Reset do estado de todas as opções antes de aplicar as regras
+            sessao12.disabled = false;
+            sessao13.disabled = false;
+            sessao1345.disabled = false;
+            lbl12.classList.remove('opacity-40', 'pointer-events-none');
+            lbl13.classList.remove('opacity-40', 'pointer-events-none');
+            lbl1345.classList.remove('opacity-40', 'pointer-events-none');
+
+            if (lunchChoice === "13h") {
+                // Almoço 13h bloqueia sessões das 12h e 13h
+                sessao12.disabled = true;
+                sessao13.disabled = true;
+                sessao1345.checked = true; // Seleção padrão forçada
+                
+                lbl12.classList.add('opacity-40', 'pointer-events-none');
+                lbl13.classList.add('opacity-40', 'pointer-events-none');
+            } else if (lunchChoice === "15h") {
+                // Almoço 15h bloqueia sessão das 13h45
+                sessao1345.disabled = true;
+                lbl1345.classList.add('opacity-40', 'pointer-events-none');
+                
+                // Se a sessão de 13h45 estava marcada, joga a seleção para a das 13h
+                if (sessao1345.checked) {
+                    sessao13.checked = true;
+                }
+            }
+        }
+
+        // Geração da tela final com as informações customizadas e links reais
+        function generateConfirmation() {
+            const txt = document.getElementById('msg-2045').value;
+            if(txt.trim() !== "") message2045 = txt;
+
+            const lunchChoice = document.querySelector('input[name="lunch"]:checked').value;
+            const sessionChoice = document.querySelector('input[name="session"]:checked').value;
+            const itineraryDiv = document.getElementById('dynamic-itinerary');
+
+            let itineraryHTML = "";
+
+            if (lunchChoice === "13h") {
+                itineraryHTML = `
+                    <p><strong><i class="fa-solid fa-burger text-pink-500 mr-1"></i> 13:00h:</strong> Vamos ao Mais Shopping almoçar no <strong>Mania de Churrasco</strong>. <a class="text-pink-600 underline font-semibold inline-flex items-center gap-1" href="https://maps.app.goo.gl/B4zfoJok68EGSn8s6" target="_blank">Ver no Maps <i class="fa-solid fa-location-dot text-xs"></i></a></p>
+                    <p><strong><i class="fa-solid fa-ticket text-pink-500 mr-1"></i> 13:45h:</strong> Assistir ao filme <strong>Toy Story 5</strong>. <a class="text-pink-600 underline font-semibold inline-flex items-center gap-1" href="https://www.imdb.com/pt/title/tt29355505/" target="_blank">Info do filme <i class="fa-solid fa-circle-info text-xs"></i></a></p>
+                `;
+            } else {
+                itineraryHTML = `
+                    <p><strong><i class="fa-solid fa-ticket text-pink-500 mr-1"></i> ${sessionChoice}:</strong> Vamos ao Mais Shopping assistir ao filme <strong>Toy Story 5</strong>. <a class="text-pink-600 underline font-semibold inline-flex items-center gap-1" href="https://www.imdb.com/pt/title/tt29355505/" target="_blank">Info do filme <i class="fa-solid fa-circle-info text-xs"></i></a></p>
+                    <p><strong><i class="fa-solid fa-burger text-pink-500 mr-1"></i> 15:00h:</strong> Vamos almoçar no <strong>Mania de Churrasco</strong>. <a class="text-pink-600 underline font-semibold inline-flex items-center gap-1" href="https://maps.app.goo.gl/B4zfoJok68EGSn8s6" target="_blank">Ver no Maps <i class="fa-solid fa-location-dot text-xs"></i></a></p>
+                `;
+            }
+
+            itineraryDiv.innerHTML = itineraryHTML;
+
+            // Link Google Agenda
+            const agendaTitle = encodeURIComponent("Nosso Encontro Especial ❤️");
+            const agendaDetails = encodeURIComponent(`Ponto de encontro: Estação Santo Amaro às 12h.\nAlmoço: Mania de Churrasco\nFilme: Toy Story 5`);
+            const googleCalendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${agendaTitle}&dates=20260621T150000Z/20260621T190000Z&details=${agendaDetails}&location=Mais+Shopping,+Santo+Amaro`;
+            document.getElementById('btn-calendar').href = googleCalendarLink;
+
+            // Link WhatsApp estruturado com as respostas finais
+            const textZap = `Oi João! Prontinho, montei nossa agenda do encontro! 🥰%0A%0A` +
+                            `• *Almoço:* Às ${lunchChoice}%0A` +
+                            `• *Sessão do Cinema:* ${sessionChoice}%0A%0A` +
+                            `*Mensagem secreta para os nossos filhos em 2045:*%0A"${message2045}"%0A%0A` +
+                            `Mal posso esperar! Até domingo! ✨`;
+            
+            document.getElementById('btn-whatsapp').href = `https://wa.me/${SEU_TELEFONE}?text=${textZap}`;
+
+            // Transiciona para a tela final
+            navigate('step-4', 'step-5');
+        }
+    </script>
+</body>
+</html>
